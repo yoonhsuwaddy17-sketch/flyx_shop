@@ -1,0 +1,13 @@
+:root{--bg:#0f0f10;--panel:#17181a;--muted:#8b8f98;--text:#e7e9ee;--accent:#b4ff4f;--card:#1e2024;--border:#2a2d33;}
+*{box-sizing:border-box}body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:radial-gradient(1200px 600px at 10% -20%,#15161a 0%,#0e0f12 60%),var(--bg);color:var(--text)}
+.header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--border);backdrop-filter:blur(6px);position:sticky;top:0;background:rgba(15,16,18,.6)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.6px}.brand img{height:40px;width:40px;object-fit:cover;border-radius:8px}.brand span{font-size:18px}
+.quote{color:var(--muted);font-size:13px}.container{max-width:1100px;margin:24px auto;padding:0 16px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.card{background:linear-gradient(180deg,#1b1d22,#17181c);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.card img{width:100%;height:220px;object-fit:cover;display:block;background:#0b0c0e}.card .p{padding:12px 14px}h1{font-size:22px;margin:18px 0 8px}
+.price{font-weight:700;color:var(--accent)}.btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;color:#0b0c0e;background:var(--accent);font-weight:700;border:0;cursor:pointer}
+.btn.secondary{background:#2b2f36;color:var(--text);border:1px solid var(--border)}.badge{font-size:12px;color:var(--muted)}
+.section{background:#111216;border:1px solid var(--border);border-radius:16px;padding:16px;margin-top:18px}form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{font-size:13px;color:var(--muted)}input,select,textarea{width:100%;padding:10px 12px;border-radius:10px;background:#111216;border:1px solid var(--border);color:var(--text)}textarea{min-height:90px}
+table{width:100%;border-collapse:collapse}th,td{padding:10px 8px;border-bottom:1px solid var(--border);font-size:14px}th{text-align:left;color:var(--muted);font-weight:600}
+.footer{color:var(--muted);font-size:12px;padding:24px;text-align:center}.payments{display:flex;gap:10px;align-items:center}.pay-badge{padding:8px 10px;border:1px dashed var(--border);border-radius:10px;font-size:13px;color:var(--muted)}

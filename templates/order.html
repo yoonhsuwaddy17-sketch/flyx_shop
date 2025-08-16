@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="section">
+  <h1>Order — {{ product.name }}</h1>
+  <div class="badge">Unit Price: {{ '{:,.0f}'.format(product.price) }} Ks</div>
+  <form method="post">
+    <div class="row" style="margin-top:12px;">
+      <div><label>Customer Name</label><input name="customer_name" required></div>
+      <div><label>Phone</label><input name="phone" required></div>
+      <div><label>Address</label><input name="address" required></div>
+      <div><label>Size</label><select name="size" required><option>S</option><option selected>M</option><option>L</option><option>XL</option></select></div>
+      <div><label>Color</label><input name="color" placeholder="Black / Gray / White"></div>
+      <div><label>Quantity</label><input type="number" min="1" value="1" name="quantity" required></div>
+      <div><label>Payment Method</label><select name="payment" required><option>KPay</option><option>WavePay</option><option>AYAPay</option></select></div>
+      <div><label>Notes</label><input name="notes" placeholder="Optional"></div>
+    </div>
+    <div style="display:flex; gap:10px; margin-top:14px;">
+      <button class="btn" type="submit">Place Order</button>
+      <a class="btn secondary" href="{{ url_for('index') }}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

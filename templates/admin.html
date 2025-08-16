@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="section">
+  <h1>Admin Panel</h1>
+  <div class="badge">Password: set ENV ADMIN_PASSWORD (default: flyxadmin). Current session: {{ 'Authenticated' if authed else 'Locked' }}</div>
+</div>
+{% if not authed %}
+<form class="section" method="post" action="{{ url_for('admin_login') }}">
+  <label>Admin Password</label>
+  <input name="password" type="password" required style="margin:8px 0;">
+  <button class="btn">Login</button>
+</form>
+{% else %}
+<div class="section">
+  <h2 style="margin:0 0 10px 0;">Add / Update Product</h2>
+  <form method="post" enctype="multipart/form-data" action="{{ url_for('admin_add_product') }}">
+    <div class="row">
+      <div><label>Name</label><input name="name" required></div>
+      <div><label>Price (MMK)</label><input name="price" type="number" min="0" required></div>
+      <div><label>Brand</label><input name="brand" placeholder="FlyX"></div>
+      <div><label>Image</label><input name="image" type="file" accept="image/*"></div>
+    </div>
+    <div style="margin-top:12px;"><button class="btn" type="submit">Save Product</button></div>
+  </form>
+</div>
+<div class="section">
+  <h2 style="margin:0 0 10px 0;">Products</h2>
+  <table>
+    <tr><th>ID</th><th>Name</th><th>Price</th><th>Brand</th><th>Image</th></tr>
+    {% for p in products %}
+      <tr><td>{{ p.id }}</td><td>{{ p.name }}</td><td>{{ '{:,.0f}'.format(p.price) }} Ks</td><td>{{ p.brand }}</td><td>{{ p.image }}</td></tr>
+    {% endfor %}
+  </table>
+</div>
+<div class="section">
+  <h2 style="margin:0 0 10px 0;">Orders</h2>
+  <table>
+    <tr><th>ID</th><th>Product</th><th>Customer</th><th>Phone</th><th>Qty</th><th>Total</th><th>Payment</th><th>Status</th><th>Action</th></tr>
+    {% for o in orders %}
+    <tr>
+      <td>{{ o.id }}</td>
+      <td>{{ o.product.name if o.product else '-' }}</td>
+      <td>{{ o.customer_name }}</td>
+      <td>{{ o.phone }}</td>
+      <td>{{ o.quantity }}</td>
+      <td>{{ '{:,.0f}'.format(o.total_amount) }} Ks</td>
+      <td>{{ o.payment }}</td>
+      <td>{{ o.status }}</td>
+      <td>
+        <form method="post" action="{{ url_for('admin_update_order', order_id=o.id) }}" style="display:inline-flex; gap:6px;">
+          <select name="status">
+            <option {{ 'selected' if o.status=='Pending' }}>Pending</option>
+            <option {{ 'selected' if o.status=='Confirmed' }}>Confirmed</option>
+            <option {{ 'selected' if o.status=='Shipped' }}>Shipped</option>
+            <option {{ 'selected' if o.status=='Delivered' }}>Delivered</option>
+            <option {{ 'selected' if o.status=='Canceled' }}>Canceled</option>
+          </select>
+          <button class="btn secondary">Update</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+{% endblock %}

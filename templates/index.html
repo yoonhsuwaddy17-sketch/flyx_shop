@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="section"><h1>FlyX Shirts</h1><div class="quote">"Xpress Yourself With FlyX"</div></div>
+<div class="grid" style="margin-top:12px;">
+  {% for p in products %}
+  <div class="card">
+    <img src="{{ url_for('static', filename='uploads/' + (p.image or '')) }}" onerror="this.src='https://picsum.photos/seed/'+{{p.id}}+'/600/400'">
+    <div class="p">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-weight:700">{{ p.name }}</div>
+          <div class="price">{{ '{:,.0f}'.format(p.price) }} Ks</div>
+          <div class="badge">{{ p.brand or 'FlyX' }}</div>
+        </div>
+        <a class="btn" href="{{ url_for('order', product_id=p.id) }}">Order</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="section" style="margin-top:16px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+    <div class="payments">
+      <img src="{{ url_for('static', filename='payments/kpay.svg') }}" height="24">
+      <img src="{{ url_for('static', filename='payments/wavepay.svg') }}" height="24">
+      <img src="{{ url_for('static', filename='payments/ayapay.svg') }}" height="24">
+    </div>
+    <div class="pay-badge">Payments supported: KPay • WavePay • AYAPay</div>
+  </div>
+</div>
+{% endblock %}
