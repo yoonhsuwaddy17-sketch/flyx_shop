@@ -40,8 +40,7 @@ class Order(db.Model):
     status = db.Column(db.String(20), default='Pending')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-@app.before_first_request
-def init_db():
+with app.app_context():
     db.create_all()
     if Product.query.count() == 0:
         demo = Product(name="FlyX Classic Tee", price=10000, brand="FlyX", image=None)
